@@ -10,58 +10,46 @@ def test_student_registration_form():
     registration_page.open()
 
     # WHEN
-    registration_page.fill_first_name('Olga').fill_last_name('YA')
-    browser.element('#userEmail').type('name@example.com')
-
-    browser.all('[name=gender]').element_by(have.value('Female')).element('..').click()
-
-    browser.element('#userNumber').type('1234567891')
-
+    registration_page.fill_first_name('Ivan')
+    registration_page.fill_last_name('YA')
+    registration_page.fill_email('name@example.com')
+    registration_page.check_gender('Male')
+    registration_page.fill_phone('1234567891')
     registration_page.fill_date_of_birth('1999', 'May', '11')
-
-    browser.element('#subjectsInput').type('Computer Science').press_enter()
-
-    browser.all('.custom-checkbox').element_by(have.exact_text('Reading')).click()
-
-    browser.element('#uploadPicture').set_value(resource.path('foto.jpg'))
-
-    browser.element('#currentAddress').type('Moscowskaya Street 18')
-
+    registration_page.fill_subjects('Computer Science')
+    registration_page.check_hobbies('Reading')
+    registration_page.upload_photo('test.png')
+    registration_page.fill_currentAddress('Bronnya Street 14')
     registration_page.fill_state('NCR')
-
-    browser.element('#city').click()
-    browser.all('[id^=react-select][id*=option]').element_by(
-        have.exact_text('Delhi')
-    ).click()
-
-    browser.element('#submit').perform(command.js.click)
+    registration_page.select_city('Delhi')
+    registration_page.submit()
 
     # THEN
     registration_page.should_registered_user_with(
-        'Olga YA',
+        'Ivan YA',
         'name@example.com',
-        'Female',
+        'Male',
         '1234567891',
         '11 May,1999',
         'Computer Science',
         'Reading',
-        'foto.jpg',
-        'Moscowskaya Street 18',
+        'test.jpg',
+        'Bronnya Street 14',
         'NCR Delhi',
     )
     '''
     # example of implementing assertion-free pageobjects
     registration_page.registered_user_data.should(
         have.exact_texts(
-            'Olga YA',
+            'Ivan YA',
             'name@example.com',
-            'Female',
+            'Male',
             '1234567891',
             '11 May,1999',
             'Computer Science',
             'Reading',
-            'foto.jpg',
-            'Moscowskaya Street 18',
+            'test.jpg',
+            'Bronnya Street 14',
             'NCR Delhi',
         )
     )

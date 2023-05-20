@@ -1,28 +1,30 @@
+import os
+import resource
+
 from selene import have, command
 from selene.support.shared import browser
 
 
 class RegistrationPage:
-    def __init__(self):
-        self.first_name = browser.element('#firstName')
-        self.last_name = browser.element('#lastName')
-        self.state = browser.element('#state')
 
     def open(self):
         browser.open('/automation-practice-form')
-        browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).wait_until(
-            have.size_greater_than_or_equal(3)
-        )
-        browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
         return self
 
     def fill_first_name(self, value):
-        self.first_name.type(value)
-        return self
+        browser.element('#firstName').type(value)
 
     def fill_last_name(self, value):
-        self.last_name.type(value)
-        return self
+        browser.element('#lastName').type(value)
+
+    def fill_email(self, value):
+        browser.element('#userEmail').type(value)
+
+    def check_gender(self, value):
+        browser.all('[name=gender]').element_by(have.value(value)).element('..').click()
+
+    def fill_phone(self, value):
+        browser.element('#userNumber').type(value)
 
     def fill_date_of_birth(self, year, month, day):
         browser.element('#dateOfBirthInput').click()
@@ -33,13 +35,25 @@ class RegistrationPage:
         ).click()
         return self
 
-    def fill_state(self, name):
-        self.state.perform(command.js.scroll_into_view)
-        self.state.click()
-        browser.all('[id^=react-select][id*=option]').element_by(
-            have.exact_text(name)
-        ).click()
-        return self
+    def fill_subjects(self, value):
+        browser.element('#subjectsInput').type(value).press_enter()
+
+    def check_hobbies(self, value):
+        browser.all('.custom-checkbox').element_by(have.exact_text(value)).click()
+
+    def upload_photo(self, value):
+        browser.element('#uploadPicture').send_keys(os.path.abspath(f'../{value}'))
+
+    def fill_currentAddress(self, value):
+        browser.element('#currentAddress').type(value)
+    def fill_state(self, value):
+        browser.element('#state #react-select-3-input').type(value).press_enter()
+
+    def select_city(self, value):
+        browser.element('#city #react-select-4-input').type(value).press_enter()
+
+    def submit(self):
+        browser.element('#submit').perform(command.js.click)
 
     def should_registered_user_with(self, full_name, email, *tbd):
         # todo: refactor to reuse parameters
@@ -47,13 +61,13 @@ class RegistrationPage:
             have.exact_texts(
                 full_name,
                 email,
-                'Female',
+                'Male',
                 '1234567891',
                 '11 May,1999',
                 'Computer Science',
                 'Reading',
-                'foto.jpg',
-                'Moscowskaya Street 18',
+                'test.jpg',
+                'Bronnya Street 14',
                 'NCR Delhi',
             )
         )
