@@ -1,7 +1,7 @@
-from selene.support.shared import browser
+import time
+
 from selene import have
-from selene import command
-from demoqa_tests import resource
+
 from demoqa_tests.model.pages.registration_page import RegistrationPage
 
 
@@ -9,7 +9,6 @@ def test_student_registration_form():
     registration_page = RegistrationPage()
     registration_page.open()
 
-    # WHEN
     registration_page.fill_first_name('Ivan')
     registration_page.fill_last_name('YA')
     registration_page.fill_email('name@example.com')
@@ -24,33 +23,17 @@ def test_student_registration_form():
     registration_page.select_city('Delhi')
     registration_page.submit()
 
-    # THEN
-    registration_page.should_registered_user_with(
-        'Ivan YA',
-        'name@example.com',
-        'Male',
-        '1234567891',
-        '11 May,1999',
-        'Computer Science',
-        'Reading',
-        'test.jpg',
-        'Bronnya Street 14',
-        'NCR Delhi',
-    )
-    '''
-    # example of implementing assertion-free pageobjects
-    registration_page.registered_user_data.should(
-        have.exact_texts(
-            'Ivan YA',
-            'name@example.com',
-            'Male',
-            '1234567891',
-            '11 May,1999',
-            'Computer Science',
-            'Reading',
-            'test.jpg',
-            'Bronnya Street 14',
-            'NCR Delhi',
-        )
-    )
-    '''
+    time.sleep(10)
+
+    registration_page.assert_user_data().should(have.texts('Student Name', 'Ivan YA',
+                                                           'Student Email', 'name@example.com',
+                                                           'Gender', 'Male',
+                                                           'Mobile', '1234567891',
+                                                           'Date of Birth', '11 May,1999',
+                                                           'Subjects Computer', 'Science',
+                                                           'Hobbies', 'Reading',
+                                                           'Picture', 'test.jpg',
+                                                           'Address Russia', 'Bronnya Street 14',
+                                                           'State and City', 'NCR Delhi'))
+
+    # registration_page.close_submission()
