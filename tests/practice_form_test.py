@@ -23,17 +23,17 @@ def test_student_registration_form():
     registration_page.select_city('Delhi')
     registration_page.submit()
 
-    time.sleep(10)
+    # time.sleep(10)
 
     registration_page.assert_user_data().should(have.texts('Student Name', 'Ivan YA',
                                                            'Student Email', 'name@example.com',
                                                            'Gender', 'Male',
                                                            'Mobile', '1234567891',
                                                            'Date of Birth', '11 May,1999',
-                                                           'Subjects Computer', 'Science',
+                                                           'Subjects', 'Computer Science',
                                                            'Hobbies', 'Reading',
                                                            'Picture', 'test.jpg',
-                                                           'Address Russia', 'Bronnya Street 14',
+                                                           'Address', 'Bronnya Street 14',
                                                            'State and City', 'NCR Delhi'))
 
     # registration_page.close_submission()

@@ -39,10 +39,9 @@ class RegistrationPage:
         ).click()
         return self
 
-    def fill_subjects(self, *args):
-        for subject in args:
-            browser.element('#subjectsInput').type(subject).press_enter()
-            return self
+    def fill_subjects(self, value):
+        browser.element('#subjectsInput').type(value).press_enter()
+        return self
 
     def check_hobbies(self, *args):
         for hobby in args:
