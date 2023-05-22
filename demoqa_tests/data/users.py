@@ -8,8 +8,10 @@ class Gender:
     female = 'Female'
     other = 'Other'
 
-
 class Subject:
+    # def __init__(self):
+    #     self.value = None
+
     accounting = 'Accounting'
     arts = 'Arts'
     biology = 'Biology'
@@ -24,6 +26,9 @@ class Subject:
 
 
 class Hobby:
+    # def __init__(self):
+    #     self.value = None
+
     sports = 'Sports'
     reading = 'Reading'
     music = 'Music'
@@ -37,7 +42,7 @@ class User:
     number: str
     birthday: date
     subjects: List[Subject]
-    hobbies: List[Hobby]
+    hobbies: str
     picture: str
     address: str
     state: str
