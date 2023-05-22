@@ -8,10 +8,8 @@ class Gender:
     female = 'Female'
     other = 'Other'
 
-class Subject:
-    # def __init__(self):
-    #     self.value = None
 
+class Subject:
     accounting = 'Accounting'
     arts = 'Arts'
     biology = 'Biology'
@@ -26,12 +24,11 @@ class Subject:
 
 
 class Hobby:
-    # def __init__(self):
-    #     self.value = None
 
     sports = 'Sports'
     reading = 'Reading'
     music = 'Music'
+
 
 @dataclasses.dataclass
 class User:

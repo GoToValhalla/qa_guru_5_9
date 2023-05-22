@@ -1,4 +1,3 @@
-
 from demoqa_tests.data.users import user
 from demoqa_tests.model.pages.registration_page import RegistrationPage
 
