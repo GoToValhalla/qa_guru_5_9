@@ -2,6 +2,7 @@ import os
 from selene import have, command
 from selene.support.shared import browser
 from demoqa_tests.data.users import User
+from tests import resource
 
 
 class RegistrationPage:
@@ -21,7 +22,7 @@ class RegistrationPage:
         browser.element('.react-datepicker__day--011').click()
         browser.element('#subjectsInput').type(user.subjects).press_enter()
         browser.all('.custom-checkbox').element_by(have.exact_text(user.hobbies)).click()
-        browser.element('#uploadPicture').send_keys(os.getcwd() + f"/{user.picture}")
+        browser.element('#uploadPicture').send_keys(os.getcwd() + f"/resources/{user.picture}")
 
         browser.element('#currentAddress').type(user.address)
 
