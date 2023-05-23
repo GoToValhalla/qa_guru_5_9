@@ -49,7 +49,7 @@ class RegistrationPage:
             return self
 
     def upload_photo(self, value):
-        browser.element('#uploadPicture').send_keys(os.path.abspath(f'../{value}'))
+        browser.element('#uploadPicture').send_keys(os.getcwd() + f'/resources/{value}')
         return self
 
     def fill_currentAddress(self, value):

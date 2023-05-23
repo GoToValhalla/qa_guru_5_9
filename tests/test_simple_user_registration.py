@@ -17,7 +17,7 @@ def test_student_registration_form():
     registration_page.fill_date_of_birth('1999', 'May', '11')
     registration_page.fill_subjects('Computer Science')
     registration_page.check_hobbies('Reading')
-    registration_page.upload_photo('test.png')
+    registration_page.upload_photo('foto.jpg')
     registration_page.fill_currentAddress('Bronnya Street 14')
     registration_page.fill_state('NCR')
     registration_page.select_city('Delhi')
@@ -32,7 +32,7 @@ def test_student_registration_form():
                                                            'Date of Birth', '11 May,1999',
                                                            'Subjects', 'Computer Science',
                                                            'Hobbies', 'Reading',
-                                                           'Picture', 'test.jpg',
+                                                           'Picture', 'foto.jpg',
                                                            'Address', 'Bronnya Street 14',
                                                            'State and City', 'NCR Delhi'))
 
