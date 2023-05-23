@@ -1,12 +1,39 @@
-from demoqa_tests.application import app
-from demoqa_tests.data import users
+import time
+
+from selene import have
+
+from demoqa_tests.model.pages.registration_page import RegistrationPage
 
 
-def test_registers_user():
-    app.simple_registration.open()
+def test_student_registration_form():
+    registration_page = RegistrationPage()
+    registration_page.open()
 
-    app.simple_registration.register(users.admin)
+    registration_page.fill_first_name('Ivan')
+    registration_page.fill_last_name('YA')
+    registration_page.fill_email('name@example.com')
+    registration_page.check_gender('Male')
+    registration_page.fill_phone('1234567891')
+    registration_page.fill_date_of_birth('1999', 'May', '11')
+    registration_page.fill_subjects('Computer Science')
+    registration_page.check_hobbies('Reading')
+    registration_page.upload_photo('test.png')
+    registration_page.fill_currentAddress('Bronnya Street 14')
+    registration_page.fill_state('NCR')
+    registration_page.select_city('Delhi')
+    registration_page.submit()
 
-    app.panel.open_profile()
+    # time.sleep(10)
 
-    app.profile.should_have_data(users.admin)
+    registration_page.assert_user_data().should(have.texts('Student Name', 'Ivan YA',
+                                                           'Student Email', 'name@example.com',
+                                                           'Gender', 'Male',
+                                                           'Mobile', '1234567891',
+                                                           'Date of Birth', '11 May,1999',
+                                                           'Subjects', 'Computer Science',
+                                                           'Hobbies', 'Reading',
+                                                           'Picture', 'test.jpg',
+                                                           'Address', 'Bronnya Street 14',
+                                                           'State and City', 'NCR Delhi'))
+
+    # registration_page.close_submission()
