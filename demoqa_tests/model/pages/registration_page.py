@@ -49,7 +49,7 @@ class RegistrationPage:
             return self
     #TODO разобраться с запуском из терминала
     def upload_photo(self, value):
-        browser.element('#uploadPicture').send_keys(os.getcwd() + f'/resources/{value}')
+        browser.element('#uploadPicture').send_keys(os.getcwd() + f'/tests/resources/{value}')
         return self
 
     def fill_currentAddress(self, value):
