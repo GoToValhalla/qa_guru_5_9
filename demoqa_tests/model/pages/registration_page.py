@@ -22,7 +22,7 @@ class RegistrationPage:
         browser.element('.react-datepicker__day--011').click()
         browser.element('#subjectsInput').type(user.subjects).press_enter()
         browser.all('.custom-checkbox').element_by(have.exact_text(user.hobbies)).click()
-        browser.element('#uploadPicture').send_keys(os.getcwd() + f"/resources/{user.picture}")
+        browser.element('#uploadPicture').send_keys(os.getcwd() + f"/tests/resources/{user.picture}")
 
         browser.element('#currentAddress').type(user.address)
 
