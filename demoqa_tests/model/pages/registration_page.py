@@ -47,7 +47,7 @@ class RegistrationPage:
         for hobby in args:
             browser.all('.custom-checkbox').element_by(have.exact_text(hobby)).click()
             return self
-
+    #TODO разобраться с запуском из терминала
     def upload_photo(self, value):
         browser.element('#uploadPicture').send_keys(os.getcwd() + f'/resources/{value}')
         return self
